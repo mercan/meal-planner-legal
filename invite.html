@@ -1,3 +1,60 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="referrer" content="no-referrer"><title>Join a Shared Home · Meal Planner</title><link rel="stylesheet" href="styles.css"></head><body><main><h1>Join a Shared Home</h1><p>Open this invitation on the phone where Meal Planner is installed. You’ll see who invited you before joining.</p><p lang="tr">Bu daveti Meal Planner yüklü telefonunda aç. Katılmadan önce seni kimin davet ettiğini göreceksin.</p><p style="margin-top:24px"><a id="open" hidden>Open Meal Planner / Uygulamayı Aç</a></p><p id="invalid" hidden>This invitation link is invalid. / Davet bağlantısı geçersiz.</p></main><script>
-const token=location.hash.slice(1);if(/^[A-Za-z0-9_-]{43}$/.test(token)){const link=document.getElementById('open');link.href='mealplanner://household/join?token='+encodeURIComponent(token);link.hidden=false;}else{document.getElementById('invalid').hidden=false;}
-</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FCEFCF">
+<title>You’re invited · Meal Planner</title>
+<meta name="description" content="Plan the week and shop together in Meal Planner.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meal Planner">
+<meta property="og:title" content="You’re invited to a Shared Home">
+<meta property="og:description" content="Plan the week and shop together in Meal Planner.">
+<meta property="og:url" content="https://mercan.github.io/meal-planner-legal/invite.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mercan.github.io/meal-planner-legal/assets/invite/card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Meal Planner otter waving and holding out an invitation.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" href="assets/icon-180.png">
+<link rel="stylesheet" href="invite.css">
+</head>
+<body>
+<main class="invite" id="invitation">
+  <div class="scene" aria-hidden="true">
+    <div class="glow"></div><div class="side-glow"></div><div class="floor"></div><div class="shadow"></div>
+    <img class="otter" src="assets/invite/otter.webp" width="584" height="900" alt="">
+  </div>
+  <div class="words">
+    <h1>You’re invited</h1>
+    <p>Open Meal Planner to see who invited you and join their Shared Home.</p>
+  </div>
+  <div class="actions">
+    <a class="button" id="open">Open Meal Planner</a>
+    <a class="link" id="store" href="https://apps.apple.com/app/id6813231753" hidden>Get Meal Planner</a>
+  </div>
+</main>
+<main class="invite" id="broken" hidden>
+  <div class="scene" aria-hidden="true">
+    <div class="glow"></div><div class="side-glow"></div><div class="floor"></div><div class="shadow"></div>
+    <img class="otter shrug" src="assets/invite/shrug.webp" alt="">
+  </div>
+  <div class="words">
+    <h1>This invitation link isn’t valid</h1>
+    <p>Ask for a new invitation.</p>
+  </div>
+</main>
+<script>
+const token = location.hash.slice(1);
+const valid = /^[A-Za-z0-9_-]{43}$/.test(token);
+document.getElementById('invitation').hidden = !valid;
+document.getElementById('broken').hidden = valid;
+if (valid) document.getElementById('open').href = 'mealplanner://household/join?token=' + encodeURIComponent(token);
+// The App Store link only means something on an iPhone or iPad.
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1)) document.getElementById('store').hidden = false;
+</script>
+</body>
+</html>

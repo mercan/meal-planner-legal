@@ -1,0 +1,175 @@
+/* The invitation page: the app's mascot stage (butter tint, soft light, floor, contact shadow) with the otter handing over the invite. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-weight: 800;
+  font-display: swap;
+  src: url('assets/fonts/BricolageGrotesque-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/Figtree-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Figtree';
+  font-weight: 600;
+  font-display: swap;
+  src: url('assets/fonts/Figtree-SemiBold.ttf') format('truetype');
+}
+
+:root {
+  --ink: #1c2117;
+  --muted: #5b6352;
+  --tomato: #c23b22;
+  --butter: #fcefcf;
+  /* The scene is shorter on short phones, so the button stays on screen. */
+  --scene: clamp(300px, 54svh, 460px);
+  --otter: calc(var(--scene) * 0.68);
+  --feet: calc(var(--scene) - 26px);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  color-scheme: light;
+  background: var(--butter);
+}
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--butter);
+  color: var(--ink);
+  font: 400 17px/1.45 Figtree, system-ui, -apple-system, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+.invite {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(34px + env(safe-area-inset-bottom));
+}
+.invite[hidden] {
+  display: none;
+}
+
+.scene {
+  position: relative;
+  height: var(--scene);
+  flex-shrink: 0;
+}
+.scene > * {
+  position: absolute;
+}
+.glow {
+  left: 50%;
+  top: calc(var(--feet) - var(--otter) * 0.545);
+  width: calc(var(--otter) * 1.75);
+  height: calc(var(--otter) * 1.75);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.7) 36%, rgba(255, 255, 255, 0) 100%);
+}
+.side-glow {
+  left: calc(50% + 15px);
+  top: 60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+}
+.floor {
+  left: 0;
+  right: 0;
+  top: calc(var(--feet) - 40px);
+  height: 260px;
+  background: linear-gradient(180deg, rgba(28, 33, 23, 0) 0%, rgba(28, 33, 23, 0.035) 15.4%, rgba(28, 33, 23, 0) 100%);
+}
+.shadow {
+  left: 50%;
+  top: var(--feet);
+  width: calc(var(--otter) * 0.59);
+  height: calc(var(--otter) * 0.077);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  opacity: 0.16;
+  background: radial-gradient(closest-side, rgba(28, 33, 23, 0.9), rgba(28, 33, 23, 0));
+}
+.otter {
+  left: 50%;
+  top: calc(var(--feet) - var(--otter));
+  height: var(--otter);
+  width: auto;
+  /* The feet sit at 55% of the picture's width: the waving arm reaches further right. */
+  transform: translateX(-55%);
+}
+.otter.shrug {
+  transform: translateX(-50%);
+}
+
+.words,
+.actions {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+h1 {
+  margin: 8px 0 0;
+  font: 800 38px/41px 'Bricolage Grotesque', Figtree, system-ui, sans-serif;
+  letter-spacing: -0.8px;
+  text-wrap: balance;
+}
+/* An error gets the app's error headline size. */
+#broken h1 {
+  font-size: 30px;
+  line-height: 32px;
+}
+.words p {
+  margin: 12px auto 0;
+  max-width: 310px;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.actions {
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  border-radius: 28px;
+  background: var(--tomato);
+  color: #fff;
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+}
+.link {
+  padding: 14px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+}
+.button:active,
+.link:active {
+  opacity: 0.7;
+}
+.button:focus-visible,
+.link:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+.link[hidden] {
+  display: none;
+}

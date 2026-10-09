@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#FCEFCF">
+<title>Davetlisin · Meal Planner</title>
+<meta name="description" content="Meal Planner’da haftayı ve alışverişi birlikte planlayın.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meal Planner">
+<meta property="og:title" content="Ortak eve davetlisin">
+<meta property="og:description" content="Meal Planner’da haftayı ve alışverişi birlikte planlayın.">
+<meta property="og:url" content="https://mercan.github.io/meal-planner-legal/tr/invite.html">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:image" content="https://mercan.github.io/meal-planner-legal/assets/invite/card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Meal Planner su samuru el sallıyor ve bir davetiye uzatıyor.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../invite.css">
+</head>
+<body>
+<main class="invite" id="invitation">
+  <div class="scene" aria-hidden="true">
+    <div class="glow"></div><div class="side-glow"></div><div class="floor"></div><div class="shadow"></div>
+    <img class="otter" src="../assets/invite/otter.webp" width="584" height="900" alt="">
+  </div>
+  <div class="words">
+    <h1>Davetlisin</h1>
+    <p>Seni kimin davet ettiğini görmek ve ortak eve katılmak için Meal Planner’ı aç.</p>
+  </div>
+  <div class="actions">
+    <a class="button" id="open">Meal Planner’ı Aç</a>
+    <a class="link" id="store" href="https://apps.apple.com/tr/app/id6813231753" hidden>Meal Planner’ı İndir</a>
+  </div>
+</main>
+<main class="invite" id="broken" hidden>
+  <div class="scene" aria-hidden="true">
+    <div class="glow"></div><div class="side-glow"></div><div class="floor"></div><div class="shadow"></div>
+    <img class="otter shrug" src="../assets/invite/shrug.webp" alt="">
+  </div>
+  <div class="words">
+    <h1>Bu davet bağlantısı geçersiz</h1>
+    <p>Yeni bir davet iste.</p>
+  </div>
+</main>
+<script>
+const token = location.hash.slice(1);
+const valid = /^[A-Za-z0-9_-]{43}$/.test(token);
+document.getElementById('invitation').hidden = !valid;
+document.getElementById('broken').hidden = valid;
+if (valid) document.getElementById('open').href = 'mealplanner://household/join?token=' + encodeURIComponent(token);
+// App Store bağlantısı yalnızca iPhone ve iPad'de anlamlı.
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1)) document.getElementById('store').hidden = false;
+</script>
+</body>
+</html>
